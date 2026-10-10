@@ -1,1 +1,3 @@
 # parcel-scoring-radomysl
+Solar Panel Parcel Selection Tool
+During the development of this project...
