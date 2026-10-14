@@ -69,5 +69,22 @@ FROM analysis.parcels_base
 ORDER BY area_ha DESC
 LIMIT 10;
 
+-- 8. Is grupa_rejestrowa populated? (result: NULL for all parcels, column unusable)
+SELECT grupa_rejestrowa, COUNT(*) AS parcels
+FROM raw.dzialki
+GROUP BY grupa_rejestrowa
+ORDER BY parcels DESC;
+
+-- 9. What is stored in pozostale_atrybuty? (GML metadata: gml_id, bounding box corners)
+SELECT pozostale_atrybuty
+FROM raw.dzialki
+WHERE pozostale_atrybuty IS NOT NULL
+LIMIT 10;
+
+-- 10. Which JSON keys occur in pozostale_atrybuty?
+SELECT DISTINCT jsonb_object_keys(pozostale_atrybuty::jsonb) AS json_key
+FROM raw.dzialki
+WHERE pozostale_atrybuty IS NOT NULL;
+
 
   
