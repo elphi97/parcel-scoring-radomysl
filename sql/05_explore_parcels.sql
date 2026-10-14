@@ -24,18 +24,19 @@ FROM analysis.parcels_base;
 
 SELECT
     CASE
-        WHEN area_ha <0.1 THEN '1: < 0.1ha'
-        WHEN area_ha < 0.5 then '2: 0.1 - 0.5 ha'
-        WHEN area_ha <1 THEN '3: 0.5 - 1 ha'
-        WHEN area_ha < 2 THEN '4: 1 - 2 ha'
-        WHEN area_ha < 5 THEN '5: 2 - 5 ha'
-        ELSE '6: > 5 ha'      '6: >= 5 ha'
-    END                        AS size_class,
-    COUNT(*)                  AS parcels,
-    ROUND(SUM(area_ha), 1)     AS total_ha,
+        WHEN area_ha < 0.1 THEN '1: < 0.1 ha'
+        WHEN area_ha < 0.5 THEN '2: 0.1 - 0.5 ha'
+        WHEN area_ha < 1   THEN '3: 0.5 - 1 ha'
+        WHEN area_ha < 2   THEN '4: 1 - 2 ha'
+        WHEN area_ha < 5   THEN '5: 2 - 5 ha'
+        ELSE                    '6: >= 5 ha'
+    END                          AS size_class,
+    COUNT(*)                     AS parcels,
+    ROUND(SUM(area_ha), 1)       AS total_ha
 FROM analysis.parcels_base
 GROUP BY 1
 ORDER BY 1;
+
 
 
 -- 4. Parcels per cadastral district (obreb)
@@ -57,9 +58,9 @@ ORDER BY numer-jednostki;
 
 --6. Data completeness: how many parcels have NULL in key attribute colums
 SELECT
-    COUNT(*)                         AS parcels,
-    COUNT(*) FILTER (WHERE pole_ewidencyjne IS NULL) AS null_pole_ewidencyjne,
-    COUNT(*) FILTER (WHERE klasyouzytki_egib IS NULL) AS null_klasouzytki_egib
+    COUNT(*)                                            AS parcels,
+    COUNT(*) FILTER (WHERE pole_ewidencyjne IS NULL)    AS null_pole_ewidencyjne,
+    COUNT(*) FILTER (WHERE klasouzytki_egib IS NULL)    AS null_klasouzytki_egib
 FROM raw.dzialki;
 
 -- 7. Ten larges parcels (sanity check - are they plausible?)
