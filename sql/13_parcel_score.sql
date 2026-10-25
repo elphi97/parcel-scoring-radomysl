@@ -45,7 +45,8 @@ SELECT
     RANK() OVER (ORDER BY score DESC) AS score_rank
 FROM scored;
 
-ALTER TABLE analysis.parcel_score ADD PRIMARY KEY (id_dzialki);
+ALTER TABLE analysis.parcel_score ADD COLUMN objectid SERIAL PRIMARY KEY;
+ALTER TABLE analysis.parcel_score ADD CONSTRAINT parcel_score_id_dzialki_key UNIQUE (id_dzialki);
 
 CREATE INDEX parcel_score_geom_idx
     ON analysis.parcel_score USING GIST (geom);
