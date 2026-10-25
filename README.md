@@ -2,7 +2,7 @@
 
 A spatial analysis pipeline that scores cadastral parcels in the municipality of Radomyśl Wielki (southern Poland) for ground-mounted photovoltaic (solar farm) siting. Stack: PostgreSQL/PostGIS, SQL, GDAL, Python, ArcGIS Pro (arcpy).
 
-![Best parcels for solar farm siting](docs/result.pdf)
+![Best parcels for solar farm siting](docs/result_pdf.png)
 
 ## Overview
 
