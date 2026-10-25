@@ -43,7 +43,6 @@ aprx = arcpy.mp.ArcGISProject(APRX_FILE)
 
 map_obj = aprx.listMaps()[0]
 
-map_obj.addDataFromPath(out_path)
 #       layout.exportToPDF(OUT_PDF, resolution=150)
 layout = aprx.listLayouts()[0]
 layout.exportToPDF(OUT_PDF, resolution=150)

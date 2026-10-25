@@ -16,7 +16,7 @@ This is a **preliminary, assumption-based site screening**, not an investment as
 |---|---|---|---|
 | Cadastral parcels (EGiB) | Geoportal, "Download data" module, Mielec county | GPKG | state as of 7 Oct 2026; 191,663 parcels in the county, 31,769 in the municipality |
 | BDOT10k | Geoportal, Mielec county | GPKG (one file per object class) | downloaded 14 Oct 2026; 13 of 63 classes imported |
-| Municipality area (check) | [link to the municipal report] | PDF | compared with the sum of parcel areas |
+| Municipality area (check) | [Report on the state of the municipality for 2024](https://www.radomyslwielki.pl/upload/files/rada_miejska/raport_o_stanie_gminy_2024_Aktualny.pdf), section I.1 | PDF | 159.78 km²; compared with the sum of parcel areas | | PDF | compared with the sum of parcel areas |
 
 The data is not stored in the repository (file size). Download it from Geoportal and place it in `data/raw/` (see "How to run").
 
@@ -41,7 +41,7 @@ flowchart LR
 The `dzialki_radomysl` database has two schemas: `raw` (source data, unchanged) and `analysis` (calculation results, reproducible with the scripts). All data uses the EPSG:2180 coordinate system.
 
  
- ![Parcel size distribution](docs/parcels_base_map.png)
+ ![Score map](docs/parcels_base_map.png)
 ## Methodology
 
 ### 1. Land cover classification
@@ -85,9 +85,9 @@ The result is multiplied by **0.7** if a power line crosses the parcel (a restri
 ### Validation
 
 - Row counts in every table match the previous stage (`sql/03`, `08`, `10`, `12`, `14`).
-- A distance measured manually in ArcGIS Pro matches the value calculated in the database 
+- A distance measured manually in ArcGIS Pro matches the value calculated in the database (example: parcel `181108_4.0072.1`, 161.8 m).
 - The score distribution and the line-crossing penalty were checked with validation queries.
-
+- On screen validation pointed parcel is in firs row [161,49m]
 ![Validation in ArcGIS](docs/arc_gis_control.png)
 
 ## How to run
